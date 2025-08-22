@@ -1,0 +1,39 @@
+version: '3.8'
+# To rebuild images when Dockerfile or source code changes, use:
+# docker compose up --build
+services:
+  linear-regression-backend:
+    # image: linear_regression_image:v3
+    build: 
+      context: backend/
+    ports:
+      - "8000:8000"
+    container_name: linear_regression_backend
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: frontend/
+    ports:
+      - "8501:8501"
+    container_name: streamlit_frontend
+    depends_on:
+      - linear-regression-backend
+
+#   mlflow:
+#     image: mlflow:latest
+#     ports:
+#       - "5000:5000"
+#     volumes:
+#       - mlflow_artifacts:/mlflow/artifacts
+#     environment:
+#       MLFLOW_TRACKING_URI: http://mlflow:5000
+#       MLFLOW_ARTIFACTS_URI: /mlflow/artifacts
+
+# volumes:
+#   mlflow_artifacts:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       device: ./training/mlflow_artifacts
+#       o: bind
