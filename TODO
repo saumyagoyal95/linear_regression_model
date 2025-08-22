@@ -1,0 +1,40 @@
+Training
+- Perform training on container
+  - batch size: 32
+  - epochs: 10
+  - learning rate: 0.001
+  - optimizer: Adam
+  - loss function: Mean Squared Error
+- orchestrate the pre-processing and training with airflow
+- register the model on mlflow registry
+- add CI/CD to the project using GitHub Actions
+- before integration write some pytests
+
+Deployment
+- deploy the model on kubernetes using the model from mlflow registry
+- deploy the frontend on kubernetes
+-  perform load testing using some tools like JMeter or Locust
+-  set up monitoring and logging for the deployed model
+- CI/CD for deployment using GitHub Actions
+
+Cloud deployment using Managed Kubernetes
+- use terraform for infrastructure as code
+  - EKS cluster
+  - ECR for container registry and storing the registered model
+  - S3 for storing artifacts
+  - EBS for persistent storage
+- use a managed Kubernetes service like EKS on AWS
+- configure auto-scaling and load balancing
+- set up a CI/CD pipeline for automated deployments
+
+
+Technologies to use
+- Python
+- Scikit-learn
+- Airflow
+- MLflow
+- Kubernetes
+- Docker
+- GitHub Actions
+- JMeter
+- Locust
