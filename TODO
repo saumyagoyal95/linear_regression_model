@@ -1,34 +1,36 @@
-Training
-- Perform training on container
-  - batch size: 32
-  - epochs: 10
-  - learning rate: 0.001
-  - optimizer: Adam
-  - loss function: Mean Squared Error
-- orchestrate the pre-processing and training with airflow
-- register the model on mlflow registry
-- add CI/CD to the project using GitHub Actions
-- before integration write some pytests
+# TODO List
 
-Deployment
-- deploy the model on kubernetes using the model from mlflow registry
-- deploy the frontend on kubernetes
--  perform load testing using some tools like JMeter or Locust
--  set up monitoring and logging for the deployed model
-- CI/CD for deployment using GitHub Actions
+## Training
+- [ ] Perform training on container:
+  - Batch size: 32
+  - Epochs: 10
+  - Learning rate: 0.001
+  - Optimizer: Adam
+  - Loss function: Mean Squared Error
+- [ ] Orchestrate the pre-processing and training with Airflow.
+- [x] Register the model on MLflow registry.
+- [ ] Write unit tests (e.g., Pytest) before integration.
+- [ ] Add CI/CD to the project using GitHub Actions.
 
-Cloud deployment using Managed Kubernetes
-- use terraform for infrastructure as code
+
+## Deployment
+- [ ] Deploy the model on Kubernetes using the model from MLflow registry.
+- [ ] Deploy the frontend on Kubernetes.
+- [ ] Perform load testing using tools like JMeter or Locust.
+- [ ] Set up monitoring and logging for the deployed model.
+- [ ] Implement CI/CD for deployment using GitHub Actions.
+
+## Cloud Deployment (Managed Kubernetes)
+- [ ] Use Terraform for Infrastructure as Code (IaC):
   - EKS cluster
   - ECR for container registry and storing the registered model
   - S3 for storing artifacts
   - EBS for persistent storage
-- use a managed Kubernetes service like EKS on AWS
-- configure auto-scaling and load balancing
-- set up a CI/CD pipeline for automated deployments
+- [ ] Use a managed Kubernetes service like EKS on AWS.
+- [ ] Configure auto-scaling and load balancing.
+- [ ] Set up a CI/CD pipeline for automated deployments.
 
-
-Technologies to use
+## Technologies to Use
 - Python
 - Scikit-learn
 - Airflow
