@@ -1,15 +1,23 @@
 from typing import Dict
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from app.model.inference import get_prediction
 from fastapi import status
 
 app = FastAPI()
 
 class InputValues(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+        strict=True
+    )
     alcohol: float
 
 class OutputValues(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+        strict=True
+    )
     predicted_quality: float
 
 
