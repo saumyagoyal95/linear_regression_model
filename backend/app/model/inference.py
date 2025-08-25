@@ -1,13 +1,50 @@
+import os
 import pickle
 import pandas as pd
+import mlflow
+from dotenv import load_dotenv
 
-class ModelInference:
-    def __init__(self, model_path):
-        with open(model_path, "rb") as f:
-            self.model = pickle.load(f)
+load_dotenv()
+
+class ModelHandler:
+    """
+    Class to handle model loading and inference.
+    """
+
+    def __init__(self):
+        self.registry_name = os.getenv("MODEL_REGISTRY_NAME", "sklearn-lr-develop")
+        self.model_version = os.getenv("MODEL_VERSION", "1")
+        self.model_path = os.getenv("MODEL_PATH", "linear_regression_model.pkl")
+
+    def load_model(self):
+        if not self.check_model_exists():
+            print("Model file not found locally. Loading from registry...")
+            self.model = self.load_model_from_registry()
+            self.save_model()
+        else:
+            print("Loading model from local file...")
+            with open(self.model_path, "rb") as f:
+                self.model = pickle.load(f)
+
+    def check_model_exists(self) -> bool:
+        """Check if the model pickle file exists in the current path."""
+        return os.path.exists(self.model_path)
+
+    def load_model_from_registry(self):
+        """Load the model from the MLflow registry."""
+        model_uri = f"models:/{self.registry_name}/{self.model_version}"
+        model = mlflow.pyfunc.load_model(model_uri)
+        print(f"Model loaded from registry of mlflow: {self.registry_name}, version: {self.model_version}")
+        return model
+
+    def save_model(self):
+        """Save the loaded model to a pickle file."""
+        with open(self.model_path, "wb") as f:
+            pickle.dump(self.model, f)
 
     def predict(self, X):
-        """Make predictions using the loaded model.
+        """
+        Make predictions using the loaded model.
         Args:
             X (array-like or DataFrame): Input features
         Returns:
@@ -16,7 +53,13 @@ class ModelInference:
         return self.model.predict(X)
 
 def get_prediction(input_values: float):
-
+    """
+    Generate predictions for wine quality based on input features.
+    Args:
+        input_values (float): Alcohol value provided by the user.
+    Returns:
+        float: Predicted wine quality.
+    """
     # Define the feature names (update as per your model's training features)
     feature_names = [
         'fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',
@@ -53,10 +96,9 @@ def get_prediction(input_values: float):
         alcohol
     ]
     X = pd.DataFrame([user_input], columns=feature_names)
-    model_path = "app/model/linear_regression_model.pkl"
-    infer = ModelInference(model_path)
-    preds = infer.predict(X)
-    # print("Predicted wine quality:", preds[0])
+    handler = ModelHandler()
+    handler.load_model()
+    preds = handler.predict(X)
 
     return preds[0]
 
