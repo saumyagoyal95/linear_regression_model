@@ -9,7 +9,7 @@
   - Loss function: Mean Squared Error
 - [ ] Orchestrate the pre-processing and training with Airflow.
 - [x] Register the model on MLflow registry.
-- [ ] Write unit tests (e.g., Pytest) before integration.
+- [x] Write unit tests (e.g., Pytest) before integration.
 - [ ] Add CI/CD to the project using GitHub Actions.
 
 
