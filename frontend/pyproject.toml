@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+addopts = "-vv --strict-markers --import-mode=append"
+testpaths = ["tests"]
+markers = [
+  "slow: slow tests",
+  "integration: integration tests hitting I/O"
+]
