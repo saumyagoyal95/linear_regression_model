@@ -14,7 +14,7 @@
 
 
 ## Deployment
-- [ ] Deploy the model on Kubernetes using the model from MLflow registry.
+- [x] Deploy the model on Kubernetes/docker-compose using the model from MLflow registry.
 - [ ] Deploy the frontend on Kubernetes.
 - [ ] Perform load testing using tools like JMeter or Locust.
 - [ ] Set up monitoring and logging for the deployed model.
