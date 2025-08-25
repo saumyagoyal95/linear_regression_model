@@ -46,6 +46,16 @@ This repository is designed for practicing Machine Learning Engineering concepts
    - Frontend: `http://localhost:8501`
    - Backend API: `http://localhost:8000`
 
+### Running Tests
+
+To run the tests for each directory, use the following commands:
+
+#### Tests
+Navigate to the `backend/frontend/training` directory and run:
+```bash
+PYTHONPATH=$(pwd) pytest -q
+```
+
 ## Best Practices
 
 - Follow the `TODO` file for pending tasks.
